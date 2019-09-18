@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Prototype</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="{% static 'prototype/js/gijgo.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.min.css' %}">
+    {% block html_head %} {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" id="navbar">
+    			<div class="container">
+
+            <a class="navbar-brand mynav" href="{% url 'home' %}">Prototype</a>
+
+    					<ul class="nav navbar-nav navbar-right" id="navlinks">
+                {% if user.is_authenticated %}
+                <li class="nav-item active"><a href="{% url "requests:create_request" %}" class="btn btn-simple text-white">Create Request</a></li>
+                <li class="nav-item active"><a href="{% url "trips:create_trip" %}" class="btn btn-simple text-white">Create Ride</a></li>
+                <li class="nav-item active"><a href=# class="btn btn-simple text-white">My Requests</a></li>
+                <li class="nav-item active"><a href="{% url "users:logout" %}" class="btn btn-simple text-white">Logout</a></li>
+
+                {% else %}
+    						<li class="nav-item active"><a href="{% url "users:login" %}" class="btn btn-simple text-white">Login</a></li>
+                <li class="nav-item active"><a href="{% url "users:signup" %}" class="btn btn-simple text-white">Signup</a></li>
+                {% endif %}
+    					</ul>
+
+    			</div>
+    		</nav>
+        <div class="container" id="titletop">
+          <h1>Welcome to Prototype!</h1>
+          <p>Create a user and log in</p>
+        </div>
+        {% block content %}
+        {% endblock %}
+
+  </body>
+</html>

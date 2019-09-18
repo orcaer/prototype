@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<h4>¿A dónde vas?</h4>
+
+<form method="GET">
+  {% bootstrap_form filter.form %}
+  <button type="submit" class="btn btn-primary">Buscar Viajes</button>
+</form>
+
+<table>
+  {% for trip in filter.qs %}
+    <tr>
+      <td>Usuario:{{trip.user}}</td>
+      <td>Destino:{{ trip.destination }}</td>
+      <td>Salida:{{trip.date_request}}</td>
+      <td>Lugares disponibles:{{trip.places}}</td>
+      <td><a href="{%url 'trips:confirm_trip' trip.user trip.pk %}" class="btn btn-primary" role = "button">Solicitar</a></td>
+    </tr>
+
+  {% endfor %}
+</table>
+
+
+{% endblock %}
